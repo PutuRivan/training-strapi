@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_company_profile_company_overviews",
+  "info": {
+    "displayName": "Company Overview"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    }
+  },
+  "config": {}
+}

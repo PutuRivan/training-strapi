@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_company_profile_business_licenses",
+  "info": {
+    "displayName": "Business License"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "blocks",
+      "required": true
+    }
+  },
+  "config": {}
+}

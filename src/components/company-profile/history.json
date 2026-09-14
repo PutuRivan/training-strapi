@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_company_profile_histories",
+  "info": {
+    "displayName": "History"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "component",
+      "component": "company-profile.history-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

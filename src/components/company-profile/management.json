@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_company_profile_managements",
+  "info": {
+    "displayName": "Management"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "COMMISSIONER",
+        "DIRECTOR"
+      ]
+    }
+  },
+  "config": {}
+}
