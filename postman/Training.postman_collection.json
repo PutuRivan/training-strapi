@@ -1,0 +1,278 @@
+{
+  "info": {
+    "_postman_id": "069d9819-f0c0-4129-97f1-940b53bfd8fa",
+    "name": "Training",
+    "description": "## Training Collection\n\nThis collection is a hands-on reference for working with a content management API. It is organized into folders by content type, each containing requests to list all records or retrieve a specific one by its Document ID.\n\n### Content\n\n| Folder | Requests |\n|---|---|\n| **Article** | All Articles, Article by Document ID |\n| **Category** | All Categories, Category by Document ID |\n| **Tag** | All Tags, Tag by Document ID |\n| **Product** | All Products, Product by Document ID |\n| **Company Profile** | Company Profile |\n\n### Environment\n\nUse the **Training** environment to supply the required variables:\n\n| Variable | Description |\n|---|---|\n| `API_BASE_URL` | Base URL for all API requests |\n| `ARTICLE_DOCUMENT_ID` | ID of a specific article to fetch |\n| `CATEGORIES_DOCUMENT_ID` | ID of a specific category to fetch |\n| `TAG_DOCUMENT_ID` | ID of a specific tag to fetch |\n| `PRODUCT_DOCUMENT_ID` | ID of a specific product to fetch |",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34838275"
+  },
+  "item": [
+    {
+      "name": "Article",
+      "item": [
+        {
+          "name": "All Article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/articles",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "articles"
+              ],
+              "query": [
+                {
+                  "key": "fields",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "populate",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "filters",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "pagination",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "locale",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Article by Document ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/articles/{{ARTICLE_DOCUMENT_ID}}?populate=*",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "articles",
+                "{{ARTICLE_DOCUMENT_ID}}"
+              ],
+              "query": [
+                {
+                  "key": "populate",
+                  "value": "*"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/categories",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Categories by Document Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/categories/{{CATEGORIES_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "categories",
+                "{{CATEGORIES_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "item": [
+        {
+          "name": "All Tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/tags",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "tags"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Tag by Document Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/tags/{{TAG_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "tags",
+                "{{TAG_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "All Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/products",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Product by Document Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/products/{{PRODUCT_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "products",
+                "{{PRODUCT_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Company Profile",
+      "item": [
+        {
+          "name": "Company Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/company-profile?populate[company_overview]=true&populate[company_vision_mission]=true&populate[company_business_license]=true&populate[company_history][populate][items]=true&populate[company_management]=true&populate[company_award][populate][image]=true",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "company-profile"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "published",
+                  "disabled": true
+                },
+                {
+                  "key": "populate[company_overview]",
+                  "value": "true"
+                },
+                {
+                  "key": "populate[company_vision_mission]",
+                  "value": "true"
+                },
+                {
+                  "key": "populate[company_business_license]",
+                  "value": "true"
+                },
+                {
+                  "key": "populate[company_history][populate][items]",
+                  "value": "true"
+                },
+                {
+                  "key": "populate[company_management]",
+                  "value": "true"
+                },
+                {
+                  "key": "populate[company_award][populate][image]",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

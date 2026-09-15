@@ -11,6 +11,8 @@ const config: Core.Config.Middlewares = [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+
+  "global::request-logger"
 ];
 
 export default config;

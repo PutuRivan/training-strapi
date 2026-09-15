@@ -45,13 +45,6 @@
       "required": true,
       "inversedBy": "articles"
     },
-    "author": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::author.author",
-      "required": true,
-      "inversedBy": "articles"
-    },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
