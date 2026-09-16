@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Career"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "position": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "employment_type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "FULL_TIME",
+        "PART_TIME",
+        "CONTRACT",
+        "INTERNSHIP"
+      ]
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "requirements": {
+      "type": "blocks",
+      "required": true
+    },
+    "responsibilities": {
+      "type": "blocks",
+      "required": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "expired_at": {
+      "type": "datetime",
+      "required": false
+    }
+  }
+}
