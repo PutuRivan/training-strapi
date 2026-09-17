@@ -29,16 +29,14 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": [
-        "images",
-        "files"
+        "images"
       ]
     },
     "company_logo": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
-        "images",
-        "files"
+        "images"
       ]
     },
     "rating": {

@@ -461,8 +461,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images' | 'files', true> &
-      Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -476,6 +475,49 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCareerCareer extends Struct.CollectionTypeSchema {
+  collectionName: 'careers';
+  info: {
+    displayName: 'Career';
+    pluralName: 'careers';
+    singularName: 'career';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    employment_type: Schema.Attribute.Enumeration<
+      ['FULL_TIME', 'PART_TIME', 'CONTRACT', 'INTERNSHIP']
+    > &
+      Schema.Attribute.Required;
+    expired_at: Schema.Attribute.DateTime;
+    is_active: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::career.career'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String & Schema.Attribute.Required;
+    position: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    requirements: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    responsibilities: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'position'> & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -563,46 +605,6 @@ export interface ApiCompanyProfileCompanyProfile
   };
 }
 
-export interface ApiJobJob extends Struct.CollectionTypeSchema {
-  collectionName: 'jobs';
-  info: {
-    displayName: 'Career';
-    pluralName: 'jobs';
-    singularName: 'job';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    employment_type: Schema.Attribute.Enumeration<
-      ['FULL_TIME', 'PART_TIME', 'CONTRACT', 'INTERNSHIP']
-    > &
-      Schema.Attribute.Required;
-    expired_at: Schema.Attribute.DateTime;
-    is_active: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
-      Schema.Attribute.Private;
-    location: Schema.Attribute.String & Schema.Attribute.Required;
-    position: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    publishedAt: Schema.Attribute.DateTime;
-    requirements: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    responsibilities: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    slug: Schema.Attribute.UID & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -618,8 +620,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -678,9 +679,9 @@ export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
   };
   attributes: {
     client_name: Schema.Attribute.String & Schema.Attribute.Required;
-    client_photo: Schema.Attribute.Media<'images' | 'files'>;
+    client_photo: Schema.Attribute.Media<'images'>;
     client_position: Schema.Attribute.String;
-    company_logo: Schema.Attribute.Media<'images' | 'files'>;
+    company_logo: Schema.Attribute.Media<'images'>;
     company_name: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1219,9 +1220,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
+      'api::career.career': ApiCareerCareer;
       'api::category.category': ApiCategoryCategory;
       'api::company-profile.company-profile': ApiCompanyProfileCompanyProfile;
-      'api::job.job': ApiJobJob;
       'api::product.product': ApiProductProduct;
       'api::tag.tag': ApiTagTag;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
