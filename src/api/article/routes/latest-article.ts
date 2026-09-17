@@ -6,6 +6,9 @@ export default {
       handler: 'article.latest',
       config: {
         auth: false,
+        policies: [
+          'api::article.valid-latest-limit',
+        ],
       },
     }
   ]

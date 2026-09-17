@@ -12,22 +12,11 @@
       "item": [
         {
           "name": "All Article",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  ""
-                ]
-              }
-            }
-          ],
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{API_BASE_URL}}/articles",
+              "raw": "{{API_BASE_URL}}/articles?sort=date:asc&pagination[page]=1&pagination[pageSize]=1&populate[category][fields]=name&filters[title][$contains]=Kelompok Tani",
               "host": [
                 "{{API_BASE_URL}}"
               ],
@@ -42,23 +31,21 @@
                 },
                 {
                   "key": "populate",
-                  "value": "",
-                  "disabled": true
-                },
-                {
-                  "key": "filters",
-                  "value": "",
+                  "value": "name",
                   "disabled": true
                 },
                 {
                   "key": "sort",
-                  "value": "",
-                  "disabled": true
+                  "value": "date:asc",
+                  "description": "value field:asc|desc"
                 },
                 {
-                  "key": "pagination",
-                  "value": "",
-                  "disabled": true
+                  "key": "pagination[page]",
+                  "value": "1"
+                },
+                {
+                  "key": "pagination[pageSize]",
+                  "value": "1"
                 },
                 {
                   "key": "status",
@@ -69,6 +56,15 @@
                   "key": "locale",
                   "value": "",
                   "disabled": true
+                },
+                {
+                  "key": "populate[category][fields]",
+                  "value": "name",
+                  "description": "for spresific relation : pouplate[collection type][field] "
+                },
+                {
+                  "key": "filters[title][$contains]",
+                  "value": "Kelompok Tani"
                 }
               ]
             }
@@ -95,6 +91,42 @@
                   "value": "*"
                 }
               ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Latest Article with Custom Route",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/articles/actions/latest?limit=10",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "articles",
+                "actions",
+                "latest"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
             }
           },
           "response": []
@@ -126,6 +158,39 @@
           "request": {
             "method": "GET",
             "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/categories/{{CATEGORIES_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "categories",
+                "{{CATEGORIES_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Categories",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "url": {
               "raw": "{{API_BASE_URL}}/categories/{{CATEGORIES_DOCUMENT_ID}}",
               "host": [
@@ -267,6 +332,212 @@
                   "key": "populate[company_award][populate][image]",
                   "value": "true"
                 }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Career",
+      "item": [
+        {
+          "name": "All Career",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/careers",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "careers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Career by Document Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/jobs/{{CAREER_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "jobs",
+                "{{CAREER_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Career",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"data\": {\r\n        \"position\": \"Backend Developer\",\r\n        \"slug\": \"backend-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_BASE_URL}}/careers",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "careers"
+              ]
+            },
+            "description": "## Create Career\n\nCreates a new career/job posting entry in the system.\n\n**Method:** `POST`\n**URL:** `{{API_BASE_URL}}/careers`\n**Authentication:** Bearer Token\n\n---\n\n### Request Body\n\nThe request body must be sent as JSON with the following structure:\n\n```json\n{\n    \"data\": {\n        \"position\": \"Backend Developer\",\n        \"slug\": \"backend-developer\",\n        \"location\": \"Jakarta\",\n        \"employment_type\": \"FULL_TIME\",\n        \"description\": [...rich text...],\n        \"requirements\": [...rich text...],\n        \"responsibilities\": [...rich text...],\n        \"is_active\": true\n    }\n}\n```\n\n| Field | Type | Description |\n|---|---|---|\n| `position` | String | The job title or position name (e.g., `\"Backend Developer\"`). |\n| `slug` | String | A URL-friendly identifier for the career post (e.g., `\"backend-developer\"`). |\n| `location` | String | The work location for the position (e.g., `\"Jakarta\"`). |\n| `employment_type` | String | The type of employment. Accepted values: `FULL_TIME`, `PART_TIME`, `CONTRACT`, `INTERNSHIP`, etc. |\n| `description` | Rich Text Array | A detailed description of the job role, formatted as a rich text array. |\n| `requirements` | Rich Text Array | A list of qualifications and requirements for the position, formatted as a rich text array. |\n| `responsibilities` | Rich Text Array | A list of duties and responsibilities for the role, formatted as a rich text array. |\n| `is_active` | Boolean | Indicates whether the career posting is currently active and visible. Set to `true` to publish. |\n\n---\n\n### Response\n\n**Status:** `201 Created`\n\nReturns the newly created career object wrapped in a `data` field, along with a `meta` object.\n\n| Field | Description |\n|---|---|\n| `id` | Auto-incremented numeric ID of the career entry. |\n| `documentId` | Unique string identifier for the document. |\n| `position` | The job title as provided in the request. |\n| `slug` | The URL-friendly slug as provided in the request. |\n| `location` | The work location as provided in the request. |\n| `employment_type` | The employment type as provided in the request. |\n| `description` | The rich text description content. |\n| `requirements` | The rich text requirements content. |\n| `responsibilities` | The rich text responsibilities content. |\n| `is_active` | Boolean indicating if the posting is active. |\n| `expired_at` | Expiration date of the posting. `null` if not set. |\n| `createdAt` | ISO 8601 timestamp of when the record was created. |\n| `updatedAt` | ISO 8601 timestamp of the last update. |\n| `publishedAt` | ISO 8601 timestamp of when the record was published. |\n| `meta` | Additional metadata object (empty `{}` by default). |"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Career",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_BASE_URL}}/careers/{{CAREER_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "careers",
+                "{{CAREER_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Career",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_BASE_URL}}/careers/{{CAREER_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "careers",
+                "{{CAREER_DOCUMENT_ID}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Testimonial",
+      "item": [
+        {
+          "name": "All Testimonial",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/testimonials",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "testimonials"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Testimonial by Document Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/testimonials/{{TESTIMONIAL_DOCUMENT_ID}}",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "testimonials",
+                "{{TESTIMONIAL_DOCUMENT_ID}}"
               ]
             }
           },
