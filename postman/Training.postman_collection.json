@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "069d9819-f0c0-4129-97f1-940b53bfd8fa",
     "name": "Training",
-    "description": "## Training Collection\n\nThis collection is a hands-on reference for working with a content management API. It is organized into folders by content type, each containing requests to list all records or retrieve a specific one by its Document ID.\n\n### Content\n\n| Folder | Requests |\n|---|---|\n| **Article** | All Articles, Article by Document ID |\n| **Category** | All Categories, Category by Document ID |\n| **Tag** | All Tags, Tag by Document ID |\n| **Product** | All Products, Product by Document ID |\n| **Company Profile** | Company Profile |\n\n### Environment\n\nUse the **Training** environment to supply the required variables:\n\n| Variable | Description |\n|---|---|\n| `API_BASE_URL` | Base URL for all API requests |\n| `ARTICLE_DOCUMENT_ID` | ID of a specific article to fetch |\n| `CATEGORIES_DOCUMENT_ID` | ID of a specific category to fetch |\n| `TAG_DOCUMENT_ID` | ID of a specific tag to fetch |\n| `PRODUCT_DOCUMENT_ID` | ID of a specific product to fetch |",
+    "description": "A training collection for exploring and testing various API endpoints including Articles, Categories, Tags, Products, Company Profile, Careers, and Testimonials. Built on a Strapi-based backend using environment variables for base URL and document IDs.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "34838275"
   },
@@ -67,9 +67,45 @@
                   "value": "Kelompok Tani"
                 }
               ]
-            }
+            },
+            "description": "Retrieves a paginated list of articles sorted by date in ascending order. Supports filtering by title and populating the associated category name. Uses query parameters for sorting, pagination, population, and filtering."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/articles",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "articles"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"hnqqk9qb4z2jmckxubtjsg4s\", \"title\": \"Kelompok Tani Maju Bersama\", \"slug\": \"kelompok-tani-maju-bersama\", \"date\": \"2024-01-15\", \"excerpt\": \"Artikel tentang kelompok tani yang berkembang pesat.\", \"category\": {\"name\": \"Pertanian\"}, \"createdAt\": \"2024-01-15T07:00:00.000Z\", \"updatedAt\": \"2024-01-15T07:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 1, \"pageCount\": 5, \"total\": 5}}}"
+            }
+          ]
         },
         {
           "name": "Article by Document ID",
@@ -91,9 +127,46 @@
                   "value": "*"
                 }
               ]
-            }
+            },
+            "description": "Fetches a single article by its document ID. Populates all related fields using the `populate=*` query parameter."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/articles/hnqqk9qb4z2jmckxubtjsg4s",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "articles",
+                    "hnqqk9qb4z2jmckxubtjsg4s"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"hnqqk9qb4z2jmckxubtjsg4s\", \"title\": \"Kelompok Tani Maju Bersama\", \"slug\": \"kelompok-tani-maju-bersama\", \"date\": \"2024-01-15\", \"content\": \"<p>Artikel lengkap tentang kelompok tani yang berkembang pesat di Indonesia.</p>\", \"excerpt\": \"Artikel tentang kelompok tani yang berkembang pesat.\", \"category\": {\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\", \"name\": \"Pertanian\"}, \"tags\": [{\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\"}], \"createdAt\": \"2024-01-15T07:00:00.000Z\", \"updatedAt\": \"2024-01-15T07:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         },
         {
           "name": "Latest Article with Custom Route",
@@ -116,9 +189,46 @@
                   "value": "10"
                 }
               ]
-            }
+            },
+            "description": "Retrieves the latest articles using a custom Strapi route. Accepts a `limit` query parameter to control the number of results returned."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/articles/latest",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "articles",
+                    "latest"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 5, \"documentId\": \"latestArticle005\", \"title\": \"Inovasi Teknologi Pertanian 2024\", \"slug\": \"inovasi-teknologi-pertanian-2024\", \"date\": \"2024-03-10\", \"excerpt\": \"Teknologi terbaru yang mengubah dunia pertanian.\"}, {\"id\": 4, \"documentId\": \"latestArticle004\", \"title\": \"Panen Raya di Musim Hujan\", \"slug\": \"panen-raya-di-musim-hujan\", \"date\": \"2024-02-20\", \"excerpt\": \"Tips sukses panen di musim hujan.\"}], \"meta\": {}}"
+            }
+          ]
         },
         {
           "name": "New Request",
@@ -127,11 +237,48 @@
             "header": [],
             "url": {
               "raw": ""
-            }
+            },
+            "description": "A placeholder request for testing or development purposes."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/new-request",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "new-request"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": null, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoints for managing and retrieving article content. Supports listing all articles with filters and pagination, fetching a specific article by document ID, and accessing the latest articles via a custom route."
     },
     {
       "name": "Category",
@@ -149,9 +296,45 @@
               "path": [
                 "categories"
               ]
-            }
+            },
+            "description": "Retrieves a list of all available categories."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/categories",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "categories"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\", \"name\": \"Pertanian\", \"slug\": \"pertanian\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"category002xyz\", \"name\": \"Teknologi\", \"slug\": \"teknologi\", \"createdAt\": \"2024-01-02T08:00:00.000Z\", \"updatedAt\": \"2024-01-02T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+            }
+          ]
         },
         {
           "name": "Categories by Document Id",
@@ -167,9 +350,46 @@
                 "categories",
                 "{{CATEGORIES_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Fetches a single category by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/categories/kjgawlctow4aqmnn4t1me3fe",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "categories",
+                    "kjgawlctow4aqmnn4t1me3fe"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\", \"name\": \"Pertanian\", \"slug\": \"pertanian\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         },
         {
           "name": "Delete Categories",
@@ -200,11 +420,49 @@
                 "categories",
                 "{{CATEGORIES_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Deletes a category identified by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/categories/kjgawlctow4aqmnn4t1me3fe",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "categories",
+                    "kjgawlctow4aqmnn4t1me3fe"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\"}, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoints for managing article or content categories. Supports listing all categories, fetching a category by document ID, and deleting a category."
     },
     {
       "name": "Tag",
@@ -222,9 +480,74 @@
               "path": [
                 "tags"
               ]
-            }
+            },
+            "description": "Retrieves a list of all available tags."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/tags",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "tags"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\", \"slug\": \"tani\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"tag002xyz\", \"name\": \"Teknologi\", \"slug\": \"teknologi\", \"createdAt\": \"2024-01-02T08:00:00.000Z\", \"updatedAt\": \"2024-01-02T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+            },
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/tags",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "tags"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\", \"slug\": \"tani\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"tag002xyz\", \"name\": \"Teknologi\", \"slug\": \"teknologi\", \"createdAt\": \"2024-01-02T08:00:00.000Z\", \"updatedAt\": \"2024-01-02T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+            }
+          ]
         },
         {
           "name": "Tag by Document Id",
@@ -240,11 +563,49 @@
                 "tags",
                 "{{TAG_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Fetches a single tag by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/tags/z6exgshmwbovm2usctyksh0i",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "tags",
+                    "z6exgshmwbovm2usctyksh0i"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\", \"slug\": \"tani\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoints for managing tags. Supports listing all tags and fetching a specific tag by document ID."
     },
     {
       "name": "Product",
@@ -262,9 +623,45 @@
               "path": [
                 "products"
               ]
-            }
+            },
+            "description": "Retrieves a list of all available products."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"uknocf47tfnso37obckxzrau\", \"name\": \"Pupuk Organik Premium\", \"slug\": \"pupuk-organik-premium\", \"price\": 150000, \"stock\": 500, \"createdAt\": \"2024-01-05T08:00:00.000Z\", \"updatedAt\": \"2024-01-05T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"product002xyz\", \"name\": \"Pestisida Alami\", \"slug\": \"pestisida-alami\", \"price\": 75000, \"stock\": 300, \"createdAt\": \"2024-01-06T08:00:00.000Z\", \"updatedAt\": \"2024-01-06T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+            }
+          ]
         },
         {
           "name": "Product by Document Id",
@@ -280,11 +677,49 @@
                 "products",
                 "{{PRODUCT_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Fetches a single product by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/products/uknocf47tfnso37obckxzrau",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "products",
+                    "uknocf47tfnso37obckxzrau"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"uknocf47tfnso37obckxzrau\", \"name\": \"Pupuk Organik Premium\", \"slug\": \"pupuk-organik-premium\", \"price\": 150000, \"description\": \"Pupuk organik berkualitas tinggi untuk hasil panen optimal.\", \"stock\": 500, \"createdAt\": \"2024-01-05T08:00:00.000Z\", \"updatedAt\": \"2024-01-05T08:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoints for retrieving product data. Supports listing all products and fetching a specific product by document ID."
     },
     {
       "name": "Company Profile",
@@ -333,11 +768,48 @@
                   "value": "true"
                 }
               ]
-            }
+            },
+            "description": "Retrieves the full company profile with deeply populated fields including company overview, vision and mission, business license, history items, management, and award images."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/company-profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "company-profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"companyprofile001\", \"company_overview\": {\"title\": \"PT Nusantara Agri\", \"tagline\": \"Membangun Pertanian Berkelanjutan\", \"description\": \"Perusahaan agrikultur terkemuka di Indonesia.\"}, \"company_vision_mission\": {\"vision\": \"Menjadi pemimpin industri pertanian di Asia Tenggara.\", \"mission\": \"Menyediakan solusi pertanian inovatif dan berkelanjutan.\"}, \"company_business_license\": {\"number\": \"NIB-1234567890\", \"issued_date\": \"2015-03-01\"}, \"company_history\": {\"items\": [{\"year\": 2015, \"event\": \"Perusahaan didirikan di Bali.\"}, {\"year\": 2018, \"event\": \"Ekspansi ke Jawa dan Sumatera.\"}]}, \"company_management\": [{\"name\": \"I Wayan Dharma\", \"position\": \"CEO\"}, {\"name\": \"Ni Made Sari\", \"position\": \"COO\"}], \"company_award\": [{\"title\": \"Best Agri Company 2023\", \"image\": {\"url\": \"/uploads/award_2023.jpg\"}}], \"createdAt\": \"2024-01-01T00:00:00.000Z\", \"updatedAt\": \"2024-06-01T00:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoint for retrieving the full company profile, including company overview, vision and mission, business license, history, management, and awards."
     },
     {
       "name": "Career",
@@ -365,9 +837,45 @@
               "path": [
                 "careers"
               ]
-            }
+            },
+            "description": "Retrieves a list of all available career/job listings."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/careers",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "careers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"abc123career001\", \"title\": \"Frontend Developer\", \"location\": \"Bali, Indonesia\", \"type\": \"Full-time\", \"deadline\": \"2025-12-31\", \"createdAt\": \"2024-01-10T08:00:00.000Z\", \"updatedAt\": \"2024-01-10T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"abc123career002\", \"title\": \"Backend Developer\", \"location\": \"Remote\", \"type\": \"Full-time\", \"deadline\": \"2025-11-30\", \"createdAt\": \"2024-01-12T08:00:00.000Z\", \"updatedAt\": \"2024-01-12T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+            }
+          ]
         },
         {
           "name": "Career by Document Id",
@@ -383,9 +891,46 @@
                 "jobs",
                 "{{CAREER_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Fetches a single career/job listing by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/careers/abc123career001",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "careers",
+                    "abc123career001"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"abc123career001\", \"title\": \"Frontend Developer\", \"location\": \"Bali, Indonesia\", \"type\": \"Full-time\", \"description\": \"We are looking for a skilled Frontend Developer to join our team.\", \"deadline\": \"2025-12-31\", \"createdAt\": \"2024-01-10T08:00:00.000Z\", \"updatedAt\": \"2024-01-10T08:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         },
         {
           "name": "Create Career",
@@ -425,9 +970,44 @@
                 "careers"
               ]
             },
-            "description": "## Create Career\n\nCreates a new career/job posting entry in the system.\n\n**Method:** `POST`\n**URL:** `{{API_BASE_URL}}/careers`\n**Authentication:** Bearer Token\n\n---\n\n### Request Body\n\nThe request body must be sent as JSON with the following structure:\n\n```json\n{\n    \"data\": {\n        \"position\": \"Backend Developer\",\n        \"slug\": \"backend-developer\",\n        \"location\": \"Jakarta\",\n        \"employment_type\": \"FULL_TIME\",\n        \"description\": [...rich text...],\n        \"requirements\": [...rich text...],\n        \"responsibilities\": [...rich text...],\n        \"is_active\": true\n    }\n}\n```\n\n| Field | Type | Description |\n|---|---|---|\n| `position` | String | The job title or position name (e.g., `\"Backend Developer\"`). |\n| `slug` | String | A URL-friendly identifier for the career post (e.g., `\"backend-developer\"`). |\n| `location` | String | The work location for the position (e.g., `\"Jakarta\"`). |\n| `employment_type` | String | The type of employment. Accepted values: `FULL_TIME`, `PART_TIME`, `CONTRACT`, `INTERNSHIP`, etc. |\n| `description` | Rich Text Array | A detailed description of the job role, formatted as a rich text array. |\n| `requirements` | Rich Text Array | A list of qualifications and requirements for the position, formatted as a rich text array. |\n| `responsibilities` | Rich Text Array | A list of duties and responsibilities for the role, formatted as a rich text array. |\n| `is_active` | Boolean | Indicates whether the career posting is currently active and visible. Set to `true` to publish. |\n\n---\n\n### Response\n\n**Status:** `201 Created`\n\nReturns the newly created career object wrapped in a `data` field, along with a `meta` object.\n\n| Field | Description |\n|---|---|\n| `id` | Auto-incremented numeric ID of the career entry. |\n| `documentId` | Unique string identifier for the document. |\n| `position` | The job title as provided in the request. |\n| `slug` | The URL-friendly slug as provided in the request. |\n| `location` | The work location as provided in the request. |\n| `employment_type` | The employment type as provided in the request. |\n| `description` | The rich text description content. |\n| `requirements` | The rich text requirements content. |\n| `responsibilities` | The rich text responsibilities content. |\n| `is_active` | Boolean indicating if the posting is active. |\n| `expired_at` | Expiration date of the posting. `null` if not set. |\n| `createdAt` | ISO 8601 timestamp of when the record was created. |\n| `updatedAt` | ISO 8601 timestamp of the last update. |\n| `publishedAt` | ISO 8601 timestamp of when the record was published. |\n| `meta` | Additional metadata object (empty `{}` by default). |"
+            "description": "Creates a new career/job listing. Send the career details in the request body."
           },
-          "response": []
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"data\": {\r\n        \"position\": \"Backend Developer\",\r\n        \"slug\": \"backend-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/careers",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "careers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 3, \"documentId\": \"abc123career003\", \"title\": \"UI/UX Designer\", \"location\": \"Jakarta, Indonesia\", \"type\": \"Contract\", \"description\": \"Looking for a creative UI/UX Designer.\", \"deadline\": \"2025-10-31\", \"createdAt\": \"2024-03-01T09:00:00.000Z\", \"updatedAt\": \"2024-03-01T09:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         },
         {
           "name": "Update Career",
@@ -462,9 +1042,46 @@
                 "careers",
                 "{{CAREER_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Updates an existing career/job listing identified by its document ID. Send the updated fields in the request body."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/careers/abc123career001",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "careers",
+                    "abc123career001"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"abc123career001\", \"title\": \"Senior Frontend Developer\", \"location\": \"Bali, Indonesia\", \"type\": \"Full-time\", \"description\": \"Updated: We are looking for a Senior Frontend Developer.\", \"deadline\": \"2026-01-31\", \"createdAt\": \"2024-01-10T08:00:00.000Z\", \"updatedAt\": \"2024-03-05T10:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         },
         {
           "name": "Delete Career",
@@ -499,11 +1116,49 @@
                 "careers",
                 "{{CAREER_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Deletes a career/job listing identified by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/careers/abc123career001",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "careers",
+                    "abc123career001"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"abc123career001\"}, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoints for managing career/job listings. Supports listing all careers, fetching a career by document ID, creating a new career, updating an existing career, and deleting a career."
     },
     {
       "name": "Testimonial",
@@ -521,9 +1176,45 @@
               "path": [
                 "testimonials"
               ]
-            }
+            },
+            "description": "Retrieves a list of all available testimonials."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/testimonials",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "testimonials"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"testimonial001\", \"name\": \"Budi Santoso\", \"role\": \"CEO, PT Maju Jaya\", \"content\": \"Layanan yang sangat memuaskan dan profesional.\", \"rating\": 5, \"createdAt\": \"2024-01-20T08:00:00.000Z\", \"updatedAt\": \"2024-01-20T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"testimonial002\", \"name\": \"Siti Rahayu\", \"role\": \"Manager, CV Berkah\", \"content\": \"Tim yang berdedikasi dan hasil kerja yang luar biasa.\", \"rating\": 5, \"createdAt\": \"2024-01-22T08:00:00.000Z\", \"updatedAt\": \"2024-01-22T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+            }
+          ]
         },
         {
           "name": "Testimonial by Document Id",
@@ -539,11 +1230,49 @@
                 "testimonials",
                 "{{TESTIMONIAL_DOCUMENT_ID}}"
               ]
-            }
+            },
+            "description": "Fetches a single testimonial by its document ID."
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:1337/api/testimonials/testimonial001",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "1337",
+                  "path": [
+                    "api",
+                    "testimonials",
+                    "testimonial001"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\"data\": {\"id\": 1, \"documentId\": \"testimonial001\", \"name\": \"Budi Santoso\", \"role\": \"CEO, PT Maju Jaya\", \"content\": \"Layanan yang sangat memuaskan dan profesional.\", \"rating\": 5, \"createdAt\": \"2024-01-20T08:00:00.000Z\", \"updatedAt\": \"2024-01-20T08:00:00.000Z\"}, \"meta\": {}}"
+            }
+          ]
         }
-      ]
+      ],
+      "description": "Endpoints for retrieving testimonial data. Supports listing all testimonials and fetching a specific testimonial by document ID."
     }
   ]
 }
