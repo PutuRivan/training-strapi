@@ -44,9 +44,9 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
     config: {
       provider: 'nodemailer',
       providerOptions: {
-        host: env('SMTP_HOST'),
-        port: env.int('SMTP_PORT', 587),
-        secure: false, // Use `true` for port 465
+        host: env('SMTP_HOST', '127.0.0.1'),
+        port: env.int('SMTP_PORT', 1025),
+        secure: false,
         auth: {
           user: env('SMTP_USERNAME'),
           pass: env('SMTP_PASSWORD'),

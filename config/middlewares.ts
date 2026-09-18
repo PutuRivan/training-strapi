@@ -12,7 +12,7 @@ const config: Core.Config.Middlewares = [
   'strapi::favicon',
   'strapi::public',
 
-  "global::request-logger"
+  'global::request-logger',
 ];
 
 export default config;

@@ -8,25 +8,25 @@ const requestLogger: Core.MiddlewareFactory = (_config, { strapi }) => {
   return async (ctx, next) => {
     const startTime = Date.now();
 
-    await next()
+    await next();
 
     if (!ctx.path.startsWith('/api')) {
-      return
+      return;
     }
 
     const duration = Date.now() - startTime;
-    const userId = ctx.state.user?.id ?? "public";
+    const userId = ctx.state.user?.id ?? 'public';
 
     strapi.log.info(
       [
-        "[API]",
+        '[API]',
         ctx.method,
         ctx.path,
         `status=${ctx.status}`,
         `duration=${duration}ms`,
         `user=${userId}`,
         `ip=${ctx.ip}`,
-      ].join(" | "),
+      ].join(' | '),
     );
   };
 };

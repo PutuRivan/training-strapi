@@ -12,8 +12,25 @@ export default factories.createCoreService(
 
       return await strapi.documents('api::article.article').findMany({
         status: 'published',
-        sort: ['date:desc'],
+        fields: ['title', 'slug', 'date'],
+        sort: ['date:desc', 'title:asc'],
         limit: safeLimit,
+      });
+    },
+
+    async findSummary(documentId: string) {
+      return await strapi.documents('api::article.article').findOne({
+        documentId,
+        status: 'published',
+        fields: ['title', 'slug', 'date'],
+        populate: {
+          category: {
+            fields: ['name', 'slug'],
+          },
+          tags: {
+            fields: ['name', 'slug'],
+          },
+        },
       });
     },
   })

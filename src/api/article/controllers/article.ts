@@ -9,10 +9,10 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async latest(ctx) {
       const rawLimit = ctx.query.limit;
-      const limit = rawLimit ? Number(rawLimit) : 5;
+      const limit = rawLimit === undefined ? 5 : Number(rawLimit);
 
-      if (Number.isNaN(limit) || limit <= 0) {
-        return ctx.badRequest('Limit must be a positive number');
+      if (!Number.isInteger(limit) || limit <= 0 || limit > 10) {
+        return ctx.badRequest('Limit must be an integer between 1 and 10');
       }
 
       const articles = await strapi
@@ -22,6 +22,26 @@ export default factories.createCoreController(
       ctx.body = {
         data: articles,
       };
-    }
+    },
+
+    async summary(ctx) {
+      const { documentId } = ctx.params;
+
+      if (typeof documentId !== 'string' || documentId.trim().length === 0) {
+        return ctx.badRequest('A valid article documentId is required');
+      }
+
+      const article = await strapi
+        .service('api::article.article')
+        .findSummary(documentId);
+
+      if (!article) {
+        return ctx.notFound('Published article was not found');
+      }
+
+      ctx.body = {
+        data: article,
+      };
+    },
   })
 );

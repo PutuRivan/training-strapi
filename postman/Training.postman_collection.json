@@ -2,945 +2,1705 @@
   "info": {
     "_postman_id": "069d9819-f0c0-4129-97f1-940b53bfd8fa",
     "name": "Training",
-    "description": "A training collection for exploring and testing various API endpoints including Articles, Categories, Tags, Products, Company Profile, Careers, and Testimonials. Built on a Strapi-based backend using environment variables for base URL and document IDs.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "34838275"
+    "description": "Strapi 5 training collection organized from health checks through a complete CRUD flow. Mutating folders require explicit disposable IDs and appropriate tokens.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Article",
+      "name": "00 - Health & Setup",
+      "description": "",
       "item": [
         {
-          "name": "All Article",
+          "name": "Health Check",
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/articles?sort=date:asc&pagination[page]=1&pagination[pageSize]=1&populate[category][fields]=name&filters[title][$contains]=Kelompok Tani",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "articles"
-              ],
-              "query": [
-                {
-                  "key": "fields",
-                  "value": "",
-                  "disabled": true
-                },
-                {
-                  "key": "populate",
-                  "value": "name",
-                  "disabled": true
-                },
-                {
-                  "key": "sort",
-                  "value": "date:asc",
-                  "description": "value field:asc|desc"
-                },
-                {
-                  "key": "pagination[page]",
-                  "value": "1"
-                },
-                {
-                  "key": "pagination[pageSize]",
-                  "value": "1"
-                },
-                {
-                  "key": "status",
-                  "value": "",
-                  "disabled": true
-                },
-                {
-                  "key": "locale",
-                  "value": "",
-                  "disabled": true
-                },
-                {
-                  "key": "populate[category][fields]",
-                  "value": "name",
-                  "description": "for spresific relation : pouplate[collection type][field] "
-                },
-                {
-                  "key": "filters[title][$contains]",
-                  "value": "Kelompok Tani"
-                }
-              ]
-            },
-            "description": "Retrieves a paginated list of articles sorted by date in ascending order. Supports filtering by title and populating the associated category name. Uses query parameters for sorting, pagination, population, and filtering."
+            "url": "{{STRAPI_ORIGIN}}/_health",
+            "description": "Strapi process health endpoint."
           },
-          "response": [
+          "event": [
             {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/articles",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "articles"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"hnqqk9qb4z2jmckxubtjsg4s\", \"title\": \"Kelompok Tani Maju Bersama\", \"slug\": \"kelompok-tani-maju-bersama\", \"date\": \"2024-01-15\", \"excerpt\": \"Artikel tentang kelompok tani yang berkembang pesat.\", \"category\": {\"name\": \"Pertanian\"}, \"createdAt\": \"2024-01-15T07:00:00.000Z\", \"updatedAt\": \"2024-01-15T07:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 1, \"pageCount\": 5, \"total\": 5}}}"
-            }
-          ]
-        },
-        {
-          "name": "Article by Document ID",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/articles/{{ARTICLE_DOCUMENT_ID}}?populate=*",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "articles",
-                "{{ARTICLE_DOCUMENT_ID}}"
-              ],
-              "query": [
-                {
-                  "key": "populate",
-                  "value": "*"
-                }
-              ]
-            },
-            "description": "Fetches a single article by its document ID. Populates all related fields using the `populate=*` query parameter."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/articles/hnqqk9qb4z2jmckxubtjsg4s",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "articles",
-                    "hnqqk9qb4z2jmckxubtjsg4s"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"hnqqk9qb4z2jmckxubtjsg4s\", \"title\": \"Kelompok Tani Maju Bersama\", \"slug\": \"kelompok-tani-maju-bersama\", \"date\": \"2024-01-15\", \"content\": \"<p>Artikel lengkap tentang kelompok tani yang berkembang pesat di Indonesia.</p>\", \"excerpt\": \"Artikel tentang kelompok tani yang berkembang pesat.\", \"category\": {\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\", \"name\": \"Pertanian\"}, \"tags\": [{\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\"}], \"createdAt\": \"2024-01-15T07:00:00.000Z\", \"updatedAt\": \"2024-01-15T07:00:00.000Z\"}, \"meta\": {}}"
-            }
-          ]
-        },
-        {
-          "name": "Latest Article with Custom Route",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/articles/actions/latest?limit=10",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "articles",
-                "actions",
-                "latest"
-              ],
-              "query": [
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
-              ]
-            },
-            "description": "Retrieves the latest articles using a custom Strapi route. Accepts a `limit` query parameter to control the number of results returned."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/articles/latest",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "articles",
-                    "latest"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 5, \"documentId\": \"latestArticle005\", \"title\": \"Inovasi Teknologi Pertanian 2024\", \"slug\": \"inovasi-teknologi-pertanian-2024\", \"date\": \"2024-03-10\", \"excerpt\": \"Teknologi terbaru yang mengubah dunia pertanian.\"}, {\"id\": 4, \"documentId\": \"latestArticle004\", \"title\": \"Panen Raya di Musim Hujan\", \"slug\": \"panen-raya-di-musim-hujan\", \"date\": \"2024-02-20\", \"excerpt\": \"Tips sukses panen di musim hujan.\"}], \"meta\": {}}"
-            }
-          ]
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": ""
-            },
-            "description": "A placeholder request for testing or development purposes."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/new-request",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "new-request"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": null, \"meta\": {}}"
-            }
-          ]
-        }
-      ],
-      "description": "Endpoints for managing and retrieving article content. Supports listing all articles with filters and pagination, fetching a specific article by document ID, and accessing the latest articles via a custom route."
-    },
-    {
-      "name": "Category",
-      "item": [
-        {
-          "name": "All Categories",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/categories",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "categories"
-              ]
-            },
-            "description": "Retrieves a list of all available categories."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/categories",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "categories"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\", \"name\": \"Pertanian\", \"slug\": \"pertanian\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"category002xyz\", \"name\": \"Teknologi\", \"slug\": \"teknologi\", \"createdAt\": \"2024-01-02T08:00:00.000Z\", \"updatedAt\": \"2024-01-02T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
-            }
-          ]
-        },
-        {
-          "name": "Categories by Document Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/categories/{{CATEGORIES_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "categories",
-                "{{CATEGORIES_DOCUMENT_ID}}"
-              ]
-            },
-            "description": "Fetches a single category by its document ID."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/categories/kjgawlctow4aqmnn4t1me3fe",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "categories",
-                    "kjgawlctow4aqmnn4t1me3fe"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\", \"name\": \"Pertanian\", \"slug\": \"pertanian\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, \"meta\": {}}"
-            }
-          ]
-        },
-        {
-          "name": "Delete Categories",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{API_TOKEN}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([204]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
               }
-            ],
-            "url": {
-              "raw": "{{API_BASE_URL}}/categories/{{CATEGORIES_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "categories",
-                "{{CATEGORIES_DOCUMENT_ID}}"
-              ]
-            },
-            "description": "Deletes a category identified by its document ID."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "DELETE",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/categories/kjgawlctow4aqmnn4t1me3fe",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "categories",
-                    "kjgawlctow4aqmnn4t1me3fe"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"kjgawlctow4aqmnn4t1me3fe\"}, \"meta\": {}}"
-            }
-          ]
-        }
-      ],
-      "description": "Endpoints for managing article or content categories. Supports listing all categories, fetching a category by document ID, and deleting a category."
-    },
-    {
-      "name": "Tag",
-      "item": [
-        {
-          "name": "All Tags",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/tags",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "tags"
-              ]
-            },
-            "description": "Retrieves a list of all available tags."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/tags",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "tags"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\", \"slug\": \"tani\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"tag002xyz\", \"name\": \"Teknologi\", \"slug\": \"teknologi\", \"createdAt\": \"2024-01-02T08:00:00.000Z\", \"updatedAt\": \"2024-01-02T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
-            },
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/tags",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "tags"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\", \"slug\": \"tani\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"tag002xyz\", \"name\": \"Teknologi\", \"slug\": \"teknologi\", \"createdAt\": \"2024-01-02T08:00:00.000Z\", \"updatedAt\": \"2024-01-02T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
             }
           ]
         },
         {
-          "name": "Tag by Document Id",
+          "name": "API Info / Test Endpoint",
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/tags/{{TAG_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "tags",
-                "{{TAG_DOCUMENT_ID}}"
-              ]
-            },
-            "description": "Fetches a single tag by its document ID."
+            "url": "{{API_BASE_URL}}/articles/actions/latest?limit=1",
+            "description": "Lightweight Content API and custom-route smoke test."
           },
-          "response": [
+          "event": [
             {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/tags/z6exgshmwbovm2usctyksh0i",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "tags",
-                    "z6exgshmwbovm2usctyksh0i"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"z6exgshmwbovm2usctyksh0i\", \"name\": \"Tani\", \"slug\": \"tani\", \"createdAt\": \"2024-01-01T08:00:00.000Z\", \"updatedAt\": \"2024-01-01T08:00:00.000Z\"}, \"meta\": {}}"
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
             }
           ]
         }
-      ],
-      "description": "Endpoints for managing tags. Supports listing all tags and fetching a specific tag by document ID."
+      ]
     },
     {
-      "name": "Product",
+      "name": "01 - Public Content",
+      "description": "",
       "item": [
         {
-          "name": "All Product",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/products",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "products"
-              ]
-            },
-            "description": "Retrieves a list of all available products."
-          },
-          "response": [
+          "name": "Articles",
+          "description": "",
+          "item": [
             {
-              "name": "200 OK",
-              "originalRequest": {
+              "name": "Get Articles",
+              "request": {
                 "method": "GET",
                 "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/products",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "products"
-                  ]
-                }
+                "url": "{{API_BASE_URL}}/articles?sort[0]=date:desc&sort[1]=title:asc&pagination[page]=1&pagination[pageSize]=10",
+                "description": ""
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"uknocf47tfnso37obckxzrau\", \"name\": \"Pupuk Organik Premium\", \"slug\": \"pupuk-organik-premium\", \"price\": 150000, \"stock\": 500, \"createdAt\": \"2024-01-05T08:00:00.000Z\", \"updatedAt\": \"2024-01-05T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"product002xyz\", \"name\": \"Pestisida Alami\", \"slug\": \"pestisida-alami\", \"price\": 75000, \"stock\": 300, \"createdAt\": \"2024-01-06T08:00:00.000Z\", \"updatedAt\": \"2024-01-06T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Article by Document ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles/{{ARTICLE_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Article by Slug",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[slug][$eq]={{ARTICLE_SLUG}}&pagination[pageSize]=1",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Articles with Relations",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?populate[category][fields][0]=name&populate[category][fields][1]=slug&populate[tags][fields][0]=name&populate[tags][fields][1]=slug&pagination[page]=1&pagination[pageSize]=10",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         },
         {
-          "name": "Product by Document Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/products/{{PRODUCT_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "products",
-                "{{PRODUCT_DOCUMENT_ID}}"
-              ]
-            },
-            "description": "Fetches a single product by its document ID."
-          },
-          "response": [
+          "name": "Categories",
+          "description": "",
+          "item": [
             {
-              "name": "200 OK",
-              "originalRequest": {
+              "name": "Get Categories",
+              "request": {
                 "method": "GET",
                 "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/products/uknocf47tfnso37obckxzrau",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "products",
-                    "uknocf47tfnso37obckxzrau"
-                  ]
-                }
+                "url": "{{API_BASE_URL}}/categories?fields[0]=name&fields[1]=slug&sort=name:asc",
+                "description": ""
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"uknocf47tfnso37obckxzrau\", \"name\": \"Pupuk Organik Premium\", \"slug\": \"pupuk-organik-premium\", \"price\": 150000, \"description\": \"Pupuk organik berkualitas tinggi untuk hasil panen optimal.\", \"stock\": 500, \"createdAt\": \"2024-01-05T08:00:00.000Z\", \"updatedAt\": \"2024-01-05T08:00:00.000Z\"}, \"meta\": {}}"
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Category Detail",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/categories/{{CATEGORY_DOCUMENT_ID}}?populate[articles][fields][0]=title&populate[articles][fields][1]=slug",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
             }
           ]
-        }
-      ],
-      "description": "Endpoints for retrieving product data. Supports listing all products and fetching a specific product by document ID."
-    },
-    {
-      "name": "Company Profile",
-      "item": [
+        },
+        {
+          "name": "Tags",
+          "description": "",
+          "item": [
+            {
+              "name": "Get Tags",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/tags?fields[0]=name&fields[1]=slug&sort=name:asc",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Tag Detail",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/tags/{{TAG_DOCUMENT_ID}}?populate[articles][fields][0]=title&populate[articles][fields][1]=slug",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "description": "",
+          "item": [
+            {
+              "name": "Get Products",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/products?fields[0]=name&fields[1]=slug&populate[image][fields][0]=url&pagination[pageSize]=12",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Product Detail",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/products/{{PRODUCT_DOCUMENT_ID}}?populate[image][fields][0]=url",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
         {
           "name": "Company Profile",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/company-profile?populate[company_overview]=true&populate[company_vision_mission]=true&populate[company_business_license]=true&populate[company_history][populate][items]=true&populate[company_management]=true&populate[company_award][populate][image]=true",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "company-profile"
-              ],
-              "query": [
+          "description": "",
+          "item": [
+            {
+              "name": "Get Company Profile",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/company-profile?populate[company_overview]=true&populate[company_vision_mission]=true&populate[company_business_license]=true&populate[company_history][populate][items]=true&populate[company_management]=true&populate[company_award][populate][image]=true",
+                "description": ""
+              },
+              "event": [
                 {
-                  "key": "status",
-                  "value": "published",
-                  "disabled": true
-                },
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Careers",
+          "description": "",
+          "item": [
+            {
+              "name": "Get Active Careers",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/careers?filters[is_active][$eq]=true&sort=position:asc&pagination[pageSize]=20",
+                "description": ""
+              },
+              "event": [
                 {
-                  "key": "populate[company_overview]",
-                  "value": "true"
-                },
-                {
-                  "key": "populate[company_vision_mission]",
-                  "value": "true"
-                },
-                {
-                  "key": "populate[company_business_license]",
-                  "value": "true"
-                },
-                {
-                  "key": "populate[company_history][populate][items]",
-                  "value": "true"
-                },
-                {
-                  "key": "populate[company_management]",
-                  "value": "true"
-                },
-                {
-                  "key": "populate[company_award][populate][image]",
-                  "value": "true"
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
                 }
               ]
             },
-            "description": "Retrieves the full company profile with deeply populated fields including company overview, vision and mission, business license, history items, management, and award images."
-          },
-          "response": [
             {
-              "name": "200 OK",
-              "originalRequest": {
+              "name": "Get Career Detail",
+              "request": {
                 "method": "GET",
                 "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/company-profile",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "company-profile"
-                  ]
-                }
+                "url": "{{API_BASE_URL}}/careers/{{CAREER_DOCUMENT_ID}}",
+                "description": ""
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"companyprofile001\", \"company_overview\": {\"title\": \"PT Nusantara Agri\", \"tagline\": \"Membangun Pertanian Berkelanjutan\", \"description\": \"Perusahaan agrikultur terkemuka di Indonesia.\"}, \"company_vision_mission\": {\"vision\": \"Menjadi pemimpin industri pertanian di Asia Tenggara.\", \"mission\": \"Menyediakan solusi pertanian inovatif dan berkelanjutan.\"}, \"company_business_license\": {\"number\": \"NIB-1234567890\", \"issued_date\": \"2015-03-01\"}, \"company_history\": {\"items\": [{\"year\": 2015, \"event\": \"Perusahaan didirikan di Bali.\"}, {\"year\": 2018, \"event\": \"Ekspansi ke Jawa dan Sumatera.\"}]}, \"company_management\": [{\"name\": \"I Wayan Dharma\", \"position\": \"CEO\"}, {\"name\": \"Ni Made Sari\", \"position\": \"COO\"}], \"company_award\": [{\"title\": \"Best Agri Company 2023\", \"image\": {\"url\": \"/uploads/award_2023.jpg\"}}], \"createdAt\": \"2024-01-01T00:00:00.000Z\", \"updatedAt\": \"2024-06-01T00:00:00.000Z\"}, \"meta\": {}}"
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Testimonials",
+          "description": "",
+          "item": [
+            {
+              "name": "Get Testimonials",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/testimonials?fields[0]=client_name&fields[1]=client_position&fields[2]=company_name&fields[3]=testimonial&fields[4]=rating&sort=rating:desc&pagination[pageSize]=20",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Get Testimonial Detail",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/testimonials/{{TESTIMONIAL_DOCUMENT_ID}}?populate[client_photo][fields][0]=url&populate[company_logo][fields][0]=url",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }
-      ],
-      "description": "Endpoint for retrieving the full company profile, including company overview, vision and mission, business license, history, management, and awards."
+      ]
     },
     {
-      "name": "Career",
+      "name": "02 - Query & API Optimization",
+      "description": "",
       "item": [
         {
-          "name": "All Career",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
+          "name": "Populate",
+          "description": "",
+          "item": [
+            {
+              "name": "Article + Category",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?fields[0]=title&fields[1]=slug&populate[category][fields][0]=name&populate[category][fields][1]=slug",
+                "description": ""
+              },
+              "event": [
                 {
-                  "key": "token",
-                  "value": "",
-                  "type": "string"
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
                 }
               ]
             },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/careers",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "careers"
-              ]
-            },
-            "description": "Retrieves a list of all available career/job listings."
-          },
-          "response": [
             {
-              "name": "200 OK",
-              "originalRequest": {
+              "name": "Article + Tags",
+              "request": {
                 "method": "GET",
                 "header": [],
+                "url": "{{API_BASE_URL}}/articles?fields[0]=title&fields[1]=slug&populate[tags][fields][0]=name&populate[tags][fields][1]=slug",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Article + Selected Relations",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?fields[0]=title&fields[1]=slug&fields[2]=date&populate[category][fields][0]=name&populate[tags][fields][0]=name",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Article Full Populate",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?populate=*",
+                "description": "Training comparison only; prefer selective populate for production consumers."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Filtering",
+          "description": "",
+          "item": [
+            {
+              "name": "Filter by Category",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[category][slug][$eq]={{CATEGORY_SLUG}}&populate[category][fields][0]=name&populate[category][fields][1]=slug",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Filter by Tag",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[tags][slug][$in][0]={{TAG_SLUG}}&populate[tags][fields][0]=name&populate[tags][fields][1]=slug",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Filter by Slug",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[slug][$eq]={{ARTICLE_SLUG}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Search Title",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[title][$containsi]={{ARTICLE_SEARCH}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Combined Nested Filters",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[$and][0][date][$gte]={{ARTICLE_DATE_FROM}}&filters[$and][1][category][slug][$eq]={{CATEGORY_SLUG}}&filters[$and][2][tags][slug][$in][0]={{TAG_SLUG}}&populate[category][fields][0]=name&populate[tags][fields][0]=name",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sorting",
+          "description": "",
+          "item": [
+            {
+              "name": "Newest Articles",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?sort[0]=date:desc&sort[1]=title:asc",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Oldest Articles",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?sort[0]=date:asc&sort[1]=title:asc",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pagination",
+          "description": "",
+          "item": [
+            {
+              "name": "Page Based",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?pagination[page]=1&pagination[pageSize]=10",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Custom Page Size",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?pagination[page]={{PAGE}}&pagination[pageSize]={{PAGE_SIZE}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Offset Based",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?pagination[start]=0&pagination[limit]=10",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Fields",
+          "description": "",
+          "item": [
+            {
+              "name": "Selected Fields Only",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?fields[0]=title&fields[1]=slug&fields[2]=date&sort[0]=date:desc&pagination[pageSize]=10",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03 - CRUD",
+      "description": "",
+      "item": [
+        {
+          "name": "Articles",
+          "description": "",
+          "item": [
+            {
+              "name": "Create Article",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "",
+                  "raw": "{\n  \"data\": {\n    \"title\": \"{{$randomCatchPhrase}}\",\n    \"slug\": \"training-article-{{$timestamp}}\",\n    \"date\": \"2026-09-17\",\n    \"image\": [\n      \"{{ARTICLE_IMAGE_ID}}\"\n    ],\n    \"content\": [\n      {\n        \"type\": \"paragraph\",\n        \"children\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Created from the Training Postman collection.\"\n          }\n        ]\n      }\n    ],\n    \"category\": \"{{CATEGORY_DOCUMENT_ID}}\",\n    \"tags\": [\n      \"{{TAG_DOCUMENT_ID}}\"\n    ]\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
                     }
                   }
                 },
-                "url": {
-                  "raw": "http://localhost:1337/api/careers",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "careers"
-                  ]
-                }
+                "url": "{{API_BASE_URL}}/articles",
+                "description": ""
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"abc123career001\", \"title\": \"Frontend Developer\", \"location\": \"Bali, Indonesia\", \"type\": \"Full-time\", \"deadline\": \"2025-12-31\", \"createdAt\": \"2024-01-10T08:00:00.000Z\", \"updatedAt\": \"2024-01-10T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"abc123career002\", \"title\": \"Backend Developer\", \"location\": \"Remote\", \"type\": \"Full-time\", \"deadline\": \"2025-11-30\", \"createdAt\": \"2024-01-12T08:00:00.000Z\", \"updatedAt\": \"2024-01-12T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
-            }
-          ]
-        },
-        {
-          "name": "Career by Document Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/jobs/{{CAREER_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "jobs",
-                "{{CAREER_DOCUMENT_ID}}"
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
               ]
             },
-            "description": "Fetches a single career/job listing by its document ID."
-          },
-          "response": [
             {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
+              "name": "Update Article",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "",
+                  "raw": "{\n  \"data\": {\n    \"title\": \"Updated training article\",\n    \"date\": \"2026-09-17\"\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
                     }
                   }
                 },
-                "url": {
-                  "raw": "http://localhost:1337/api/careers/abc123career001",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "careers",
-                    "abc123career001"
-                  ]
-                }
+                "url": "{{API_BASE_URL}}/articles/{{ARTICLE_DOCUMENT_ID}}",
+                "description": ""
               },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"abc123career001\", \"title\": \"Frontend Developer\", \"location\": \"Bali, Indonesia\", \"type\": \"Full-time\", \"description\": \"We are looking for a skilled Frontend Developer to join our team.\", \"deadline\": \"2025-12-31\", \"createdAt\": \"2024-01-10T08:00:00.000Z\", \"updatedAt\": \"2024-01-10T08:00:00.000Z\"}, \"meta\": {}}"
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete Article",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles/{{DISPOSABLE_ARTICLE_DOCUMENT_ID}}",
+                "description": "Use only a disposable Article document ID."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         },
         {
-          "name": "Create Career",
+          "name": "Categories",
+          "description": "",
+          "item": [
+            {
+              "name": "Create Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Training Category {{$timestamp}}\",\n    \"slug\": \"training-category-{{$timestamp}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/categories",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Update Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Updated Training Category\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/categories/{{CATEGORY_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete Category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": "{{API_BASE_URL}}/categories/{{UNUSED_CATEGORY_DOCUMENT_ID}}",
+                "description": "Lifecycle middleware permits deletion only when no Article references the category."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tags",
+          "description": "",
+          "item": [
+            {
+              "name": "Create Tag",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Training Tag {{$timestamp}}\",\n    \"slug\": \"training-tag-{{$timestamp}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/tags",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Update Tag",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Updated Training Tag\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/tags/{{TAG_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete Tag",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": "{{API_BASE_URL}}/tags/{{DISPOSABLE_TAG_DOCUMENT_ID}}",
+                "description": "Use only a disposable Tag document ID."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04 - Authentication & Authorization",
+      "description": "",
+      "item": [
+        {
+          "name": "Authentication",
+          "description": "",
+          "item": [
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": \"{{USER_IDENTIFIER}}\",\n  \"password\": \"{{USER_PASSWORD}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/auth/local",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('login succeeds', () => pm.response.to.have.status(200));",
+                      "const body = pm.response.json();",
+                      "if (body.jwt) pm.environment.set('USER_JWT', body.jwt);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Current User / Auth Test",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{USER_JWT}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/users/me",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Admin",
+          "description": "",
+          "item": [
+            {
+              "name": "Allowed Resource",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?pagination[pageSize]=1",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Allowed Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Admin Test {{$timestamp}}\",\n    \"slug\": \"admin-test-{{$timestamp}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/tags",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Allowed Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Admin Updated Tag\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/tags/{{ADMIN_TEST_TAG_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Allowed Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{ADMIN_API_TOKEN}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": "{{API_BASE_URL}}/tags/{{ADMIN_TEST_TAG_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Editor",
+          "description": "",
+          "item": [
+            {
+              "name": "Allowed Resource",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{EDITOR_JWT}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?pagination[pageSize]=1",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Allowed Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{EDITOR_JWT}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Editor Test {{$timestamp}}\",\n    \"slug\": \"editor-test-{{$timestamp}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/tags",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Allowed Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{EDITOR_JWT}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"name\": \"Editor Updated Tag\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{API_BASE_URL}}/tags/{{EDITOR_TEST_TAG_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Forbidden Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{EDITOR_JWT}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": "{{API_BASE_URL}}/tags/{{EDITOR_TEST_TAG_DOCUMENT_ID}}",
+                "description": ""
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([401, 403]));",
+                      "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05 - Custom Controller & Service",
+      "description": "",
+      "item": [
+        {
+          "name": "Custom Endpoint - Latest Articles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/latest?limit=5",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Custom Action - Latest with Maximum Limit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/latest?limit=10",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Service Logic Test - Article Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/{{ARTICLE_DOCUMENT_ID}}/summary",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "06 - Policy",
+      "description": "",
+      "item": [
+        {
+          "name": "Policy - Allowed Case",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/latest?limit=5",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Policy - Rejected Case",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/latest?limit=11",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([401, 403]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "07 - Middleware",
+      "description": "",
+      "item": [
+        {
+          "name": "Request through Middleware",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles?pagination[pageSize]=1",
+            "description": "Observe method, path, status, duration, user, and IP in the Strapi log."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Request through Middleware",
           "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{API_TOKEN}}",
+                  "value": "{{ADMIN_API_TOKEN}}",
                   "type": "string"
                 }
               ]
@@ -954,325 +1714,631 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"data\": {\r\n        \"position\": \"Backend Developer\",\r\n        \"slug\": \"backend-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+              "raw": "{\n  \"data\": {\n    \"name\": \"Middleware Test {{$timestamp}}\",\n    \"slug\": \"middleware-test-{{$timestamp}}\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             },
-            "url": {
-              "raw": "{{API_BASE_URL}}/careers",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "careers"
-              ]
-            },
-            "description": "Creates a new career/job listing. Send the career details in the request body."
+            "url": "{{API_BASE_URL}}/tags",
+            "description": "Mutating request that also passes through the global request logger."
           },
-          "response": [
+          "event": [
             {
-              "name": "201 Created",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"data\": {\r\n        \"position\": \"Backend Developer\",\r\n        \"slug\": \"backend-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Backend Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/careers",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "careers"
-                  ]
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 3, \"documentId\": \"abc123career003\", \"title\": \"UI/UX Designer\", \"location\": \"Jakarta, Indonesia\", \"type\": \"Contract\", \"description\": \"Looking for a creative UI/UX Designer.\", \"deadline\": \"2025-10-31\", \"createdAt\": \"2024-03-01T09:00:00.000Z\", \"updatedAt\": \"2024-03-01T09:00:00.000Z\"}, \"meta\": {}}"
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "name": "08 - Lifecycle / Document Service",
+      "description": "",
+      "item": [
         {
-          "name": "Update Career",
+          "name": "Trigger Hook - Create Category",
           "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{API_TOKEN}}",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"name\": \"Lifecycle Test {{$timestamp}}\",\n    \"slug\": \"lifecycle-test-{{$timestamp}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{API_BASE_URL}}/categories",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Trigger Hook - Update Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
                   "type": "string"
                 }
               ]
             },
             "method": "PUT",
-            "header": [],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+              "raw": "{\n  \"data\": {\n    \"name\": \"Lifecycle Updated Category\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             },
-            "url": {
-              "raw": "{{API_BASE_URL}}/careers/{{CAREER_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "careers",
-                "{{CAREER_DOCUMENT_ID}}"
-              ]
-            },
-            "description": "Updates an existing career/job listing identified by its document ID. Send the updated fields in the request body."
+            "url": "{{API_BASE_URL}}/categories/{{LIFECYCLE_CATEGORY_DOCUMENT_ID}}",
+            "description": ""
           },
-          "response": [
+          "event": [
             {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/careers/abc123career001",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "careers",
-                    "abc123career001"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"abc123career001\", \"title\": \"Senior Frontend Developer\", \"location\": \"Bali, Indonesia\", \"type\": \"Full-time\", \"description\": \"Updated: We are looking for a Senior Frontend Developer.\", \"deadline\": \"2026-01-31\", \"createdAt\": \"2024-01-10T08:00:00.000Z\", \"updatedAt\": \"2024-03-05T10:00:00.000Z\"}, \"meta\": {}}"
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
             }
           ]
         },
         {
-          "name": "Delete Career",
+          "name": "Delete Valid Resource",
           "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{API_TOKEN}}",
+                  "value": "{{ADMIN_API_TOKEN}}",
                   "type": "string"
                 }
               ]
             },
             "method": "DELETE",
             "header": [],
+            "url": "{{API_BASE_URL}}/categories/{{UNUSED_CATEGORY_DOCUMENT_ID}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Protected Resource",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{API_BASE_URL}}/categories/{{REFERENCED_CATEGORY_DOCUMENT_ID}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([400, 409, 500]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "09 - Error & Edge Cases",
+      "description": "",
+      "item": [
+        {
+          "name": "404 - Resource Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/{{NON_EXISTENT_ARTICLE_DOCUMENT_ID}}/summary",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([404]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "400 - Invalid Payload",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
+              "raw": "{\n  \"data\": {}\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             },
-            "url": {
-              "raw": "{{API_BASE_URL}}/careers/{{CAREER_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "careers",
-                "{{CAREER_DOCUMENT_ID}}"
-              ]
-            },
-            "description": "Deletes a career/job listing identified by its document ID."
+            "url": "{{API_BASE_URL}}/articles",
+            "description": ""
           },
-          "response": [
+          "event": [
             {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "DELETE",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"data\": {\r\n        \"position\": \"fullstack Developer\",\r\n        \"slug\": \"fullstack-developer\",\r\n        \"location\": \"Jakarta\",\r\n        \"employment_type\": \"FULL_TIME\",\r\n        \"description\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"requirements\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"responsibilities\": [\r\n            {\r\n                \"type\": \"paragraph\",\r\n                \"children\": [\r\n                    {\r\n                        \"type\": \"text\",\r\n                        \"text\": \"We are looking for a Fullstack Developer.\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"is_active\": true\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/careers/abc123career001",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "careers",
-                    "abc123career001"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"abc123career001\"}, \"meta\": {}}"
-            }
-          ]
-        }
-      ],
-      "description": "Endpoints for managing career/job listings. Supports listing all careers, fetching a career by document ID, creating a new career, updating an existing career, and deleting a career."
-    },
-    {
-      "name": "Testimonial",
-      "item": [
-        {
-          "name": "All Testimonial",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/testimonials",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "testimonials"
-              ]
-            },
-            "description": "Retrieves a list of all available testimonials."
-          },
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/testimonials",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "testimonials"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": [{\"id\": 1, \"documentId\": \"testimonial001\", \"name\": \"Budi Santoso\", \"role\": \"CEO, PT Maju Jaya\", \"content\": \"Layanan yang sangat memuaskan dan profesional.\", \"rating\": 5, \"createdAt\": \"2024-01-20T08:00:00.000Z\", \"updatedAt\": \"2024-01-20T08:00:00.000Z\"}, {\"id\": 2, \"documentId\": \"testimonial002\", \"name\": \"Siti Rahayu\", \"role\": \"Manager, CV Berkah\", \"content\": \"Tim yang berdedikasi dan hasil kerja yang luar biasa.\", \"rating\": 5, \"createdAt\": \"2024-01-22T08:00:00.000Z\", \"updatedAt\": \"2024-01-22T08:00:00.000Z\"}], \"meta\": {\"pagination\": {\"page\": 1, \"pageSize\": 25, \"pageCount\": 1, \"total\": 2}}}"
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([400]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
             }
           ]
         },
         {
-          "name": "Testimonial by Document Id",
+          "name": "401 - Unauthorized",
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{API_BASE_URL}}/testimonials/{{TESTIMONIAL_DOCUMENT_ID}}",
-              "host": [
-                "{{API_BASE_URL}}"
-              ],
-              "path": [
-                "testimonials",
-                "{{TESTIMONIAL_DOCUMENT_ID}}"
+            "url": "{{API_BASE_URL}}/users/me",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([401, 403]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "403 - Forbidden",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{EDITOR_JWT}}",
+                  "type": "string"
+                }
               ]
             },
-            "description": "Fetches a single testimonial by its document ID."
+            "method": "DELETE",
+            "header": [],
+            "url": "{{API_BASE_URL}}/tags/{{EDITOR_TEST_TAG_DOCUMENT_ID}}",
+            "description": ""
           },
-          "response": [
+          "event": [
             {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:1337/api/testimonials/testimonial001",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "1337",
-                  "path": [
-                    "api",
-                    "testimonials",
-                    "testimonial001"
-                  ]
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([401, 403]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Category Still Used",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
                 }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [],
-              "cookie": [],
-              "body": "{\"data\": {\"id\": 1, \"documentId\": \"testimonial001\", \"name\": \"Budi Santoso\", \"role\": \"CEO, PT Maju Jaya\", \"content\": \"Layanan yang sangat memuaskan dan profesional.\", \"rating\": 5, \"createdAt\": \"2024-01-20T08:00:00.000Z\", \"updatedAt\": \"2024-01-20T08:00:00.000Z\"}, \"meta\": {}}"
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{API_BASE_URL}}/categories/{{REFERENCED_CATEGORY_DOCUMENT_ID}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([400, 409, 500]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation Error",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/actions/latest?limit=abc",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([400, 401, 403]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
             }
           ]
         }
-      ],
-      "description": "Endpoints for retrieving testimonial data. Supports listing all testimonials and fetching a specific testimonial by document ID."
+      ]
+    },
+    {
+      "name": "10 - Final Flow",
+      "description": "",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"name\": \"Final Flow {{$timestamp}}\",\n    \"slug\": \"final-flow-{{$timestamp}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{API_BASE_URL}}/categories",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('category created', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                  "const body = pm.response.json();",
+                  "if (body.data?.documentId) pm.environment.set('FLOW_CATEGORY_DOCUMENT_ID', body.data.documentId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"title\": \"Final Flow Article {{$timestamp}}\",\n    \"slug\": \"final-flow-article-{{$timestamp}}\",\n    \"date\": \"2026-09-17\",\n    \"image\": [\n      \"{{ARTICLE_IMAGE_ID}}\"\n    ],\n    \"content\": [\n      {\n        \"type\": \"paragraph\",\n        \"children\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Created from the Training Postman collection.\"\n          }\n        ]\n      }\n    ],\n    \"category\": \"{{FLOW_CATEGORY_DOCUMENT_ID}}\",\n    \"tags\": [\n      \"{{TAG_DOCUMENT_ID}}\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{API_BASE_URL}}/articles",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('article created', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                  "const body = pm.response.json();",
+                  "if (body.data?.documentId) pm.environment.set('FLOW_ARTICLE_DOCUMENT_ID', body.data.documentId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Article + Relations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/{{FLOW_ARTICLE_DOCUMENT_ID}}?populate[category][fields][0]=name&populate[tags][fields][0]=name",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"title\": \"Final Flow Article Updated\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{API_BASE_URL}}/articles/{{FLOW_ARTICLE_DOCUMENT_ID}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Filter Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles?filters[documentId][$eq]={{FLOW_ARTICLE_DOCUMENT_ID}}&populate[category][fields][0]=name",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cleanup Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{API_BASE_URL}}/articles/{{FLOW_ARTICLE_DOCUMENT_ID}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cleanup Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ADMIN_API_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{API_BASE_URL}}/categories/{{FLOW_CATEGORY_DOCUMENT_ID}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('expected status', () => pm.expect(pm.response.code).to.be.oneOf([200, 204]));",
+                  "pm.test('response time is reasonable', () => pm.expect(pm.response.responseTime).to.be.below(5000));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

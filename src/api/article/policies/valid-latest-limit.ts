@@ -9,9 +9,13 @@ export default (
     return true;
   }
 
+  if (Array.isArray(rawLimit)) {
+    return false;
+  }
+
   const limit = Number(rawLimit);
 
-  if (Number.isNaN(limit)) {
+  if (!Number.isInteger(limit)) {
     return false;
   }
 
