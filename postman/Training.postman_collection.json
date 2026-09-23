@@ -913,6 +913,98 @@
               "response": []
             }
           ]
+        },
+        {
+          "name": "Many-to-Many Relations",
+          "description": "Evidence for bidirectional Article ↔ Tag and Product ↔ Industry relations.",
+          "item": [
+            {
+              "name": "Articles sharing CSR Tag",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/articles?filters[tags][slug][$eq]=csr&populate[tags][fields][0]=name&populate[tags][fields][1]=slug",
+                "description": "Proves that one Tag can be linked to multiple Articles."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('status is 200', () => pm.response.to.have.status(200));",
+                      "pm.test('CSR belongs to multiple articles', () => pm.expect(pm.response.json().data.length).to.be.at.least(2));",
+                      "pm.test('each article has populated tags', () => pm.response.json().data.forEach(article => pm.expect(article.tags.length).to.be.above(0)));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "CSR Tag with Articles",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/tags?filters[slug][$eq]=csr&populate[articles][fields][0]=title&populate[articles][fields][1]=slug",
+                "description": "Proves the inverse Tag → Articles relation."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('status is 200', () => pm.response.to.have.status(200));",
+                      "pm.test('CSR exposes multiple related articles', () => pm.expect(pm.response.json().data[0].articles.length).to.be.at.least(2));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Products sharing Financial Services Industry",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/products?filters[industries][slug][$eq]=financial-services&populate[industries][fields][0]=name&populate[industries][fields][1]=slug",
+                "description": "Proves that one Industry can be linked to multiple Products."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('status is 200', () => pm.response.to.have.status(200));",
+                      "pm.test('industry belongs to multiple products', () => pm.expect(pm.response.json().data.length).to.be.at.least(2));",
+                      "pm.test('each product has populated industries', () => pm.response.json().data.forEach(product => pm.expect(product.industries.length).to.be.above(0)));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Financial Services Industry with Products",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{API_BASE_URL}}/industries?filters[slug][$eq]=financial-services&populate[products][fields][0]=name&populate[products][fields][1]=slug",
+                "description": "Proves the inverse Industry → Products relation."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('status is 200', () => pm.response.to.have.status(200));",
+                      "pm.test('industry exposes multiple related products', () => pm.expect(pm.response.json().data[0].products.length).to.be.at.least(2));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },

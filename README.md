@@ -58,6 +58,7 @@ training-strapi/
 │   │   ├── business-license/
 │   │   ├── company-history/
 │   │   ├── company-overview/
+│   │   ├── industry/
 │   │   ├── management/
 │   │   ├── product/
 │   │   ├── tag/
@@ -149,10 +150,23 @@ Product
 ├── name
 ├── slug
 ├── image
-└── description
+├── description
+└── industries → manyToMany
 ```
 
 Description menggunakan Blocks sehingga content dapat dikelola melalui Administration Panel.
+
+### Industry
+
+```text
+Industry
+├── name
+├── slug
+├── description
+└── products → manyToMany
+```
+
+Satu Product dapat digunakan pada banyak Industry, dan satu Industry dapat mempunyai banyak Product.
 
 ### Career
 
@@ -248,6 +262,7 @@ Relasi utama pada Article:
 erDiagram
     CATEGORY ||--o{ ARTICLE : classifies
     ARTICLE }o--o{ TAG : tagged_with
+    PRODUCT }o--o{ INDUSTRY : applicable_to
 
     CATEGORY {
         string name
@@ -262,6 +277,16 @@ erDiagram
     }
 
     TAG {
+        string name
+        uid slug
+    }
+
+    PRODUCT {
+        string name
+        uid slug
+    }
+
+    INDUSTRY {
         string name
         uid slug
     }
@@ -302,6 +327,23 @@ Artinya:
 1 Article → Banyak Tag
 1 Tag     → Banyak Article
 ```
+
+### Product ↔ Industry
+
+Relasi:
+
+```text
+Many-to-Many
+```
+
+Artinya:
+
+```text
+1 Product  → Banyak Industry
+1 Industry → Banyak Product
+```
+
+Strapi menyimpan relasi ini melalui join table otomatis (`products_industries_lnk`). Entity Product dan Industry tetap berdiri sendiri; menghapus satu relation tidak menghapus kedua entity.
 
 ---
 
@@ -427,6 +469,7 @@ http://localhost:1337/api
 | GET    | `/api/categories`           | Get categories                   |
 | GET    | `/api/tags`                 | Get tags                         |
 | GET    | `/api/products`             | Get products                     |
+| GET    | `/api/industries`           | Get industries                   |
 | GET    | `/api/careers`              | Get careers                      |
 | GET    | `/api/testimonials`         | Get testimonials                 |
 | GET    | `/api/company-overview`     | Get company overview             |
@@ -1183,4 +1226,3 @@ GitHub: [@PutuRivan](https://github.com/PutuRivan)
 ---
 
 > This repository is intended as a hands-on Strapi training and learning project using a realistic Company Profile CMS use case.
-

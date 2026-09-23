@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "products",
+  "collectionName": "industries",
   "info": {
-    "singularName": "product",
-    "pluralName": "products",
-    "displayName": "Product"
+    "singularName": "industry",
+    "pluralName": "industries",
+    "displayName": "Industry"
   },
   "options": {
     "draftAndPublish": true
@@ -21,23 +21,14 @@
       "targetField": "name",
       "required": true
     },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "description": {
-      "type": "blocks",
-      "required": true
+      "type": "text"
     },
-    "industries": {
+    "products": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::industry.industry",
-      "inversedBy": "products"
+      "target": "api::product.product",
+      "mappedBy": "industries"
     }
   }
 }
