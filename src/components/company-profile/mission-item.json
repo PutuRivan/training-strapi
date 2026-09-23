@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_company_profile_mission_items",
+  "info": {
+    "displayName": "Mission Item"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "required": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "vision_missions",
+  "info": {
+    "singularName": "vision-mission",
+    "pluralName": "vision-missions",
+    "displayName": "Vision Mission"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "vision": {
+      "type": "text",
+      "required": true
+    },
+    "missions": {
+      "type": "component",
+      "component": "company-profile.mission-item",
+      "repeatable": true,
+      "required": true,
+      "min": 1
+    }
+  }
+}

@@ -481,6 +481,65 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAwardAward extends Struct.SingleTypeSchema {
+  collectionName: 'awards';
+  info: {
+    displayName: 'Award';
+    pluralName: 'awards';
+    singularName: 'award';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    items: Schema.Attribute.Component<'company-profile.award-item', true> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::award.award'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBusinessLicenseBusinessLicense
+  extends Struct.SingleTypeSchema {
+  collectionName: 'business_licenses';
+  info: {
+    displayName: 'Business License';
+    pluralName: 'business-licenses';
+    singularName: 'business-license';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    items: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::business-license.business-license'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCareerCareer extends Struct.CollectionTypeSchema {
   collectionName: 'careers';
   info: {
@@ -556,49 +615,102 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCompanyProfileCompanyProfile
+export interface ApiCompanyHistoryCompanyHistory
   extends Struct.SingleTypeSchema {
-  collectionName: 'company_profiles';
+  collectionName: 'company_histories';
   info: {
-    displayName: 'Company Profile';
-    pluralName: 'company-profiles';
-    singularName: 'company-profile';
+    displayName: 'Company History';
+    pluralName: 'company-histories';
+    singularName: 'company-history';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    company_award: Schema.Attribute.Component<'company-profile.award', true>;
-    company_business_license: Schema.Attribute.Component<
-      'company-profile.business-license',
-      false
-    >;
-    company_history: Schema.Attribute.Component<
-      'company-profile.history',
-      false
-    >;
-    company_management: Schema.Attribute.Component<
-      'company-profile.management',
-      true
-    >;
-    company_overview: Schema.Attribute.Component<
-      'company-profile.company-overview',
-      false
-    >;
-    company_vision_mission: Schema.Attribute.Component<
-      'company-profile.vision-mission',
-      false
-    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    items: Schema.Attribute.Component<'company-profile.history-item', true> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::company-history.company-history'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCompanyOverviewCompanyOverview
+  extends Struct.SingleTypeSchema {
+  collectionName: 'company_overviews';
+  info: {
+    displayName: 'Company Overview';
+    pluralName: 'company-overviews';
+    singularName: 'company-overview';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::company-overview.company-overview'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiManagementManagement extends Struct.SingleTypeSchema {
+  collectionName: 'managements';
+  info: {
+    displayName: 'Management';
+    pluralName: 'managements';
+    singularName: 'management';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::company-profile.company-profile'
+      'api::management.management'
     > &
       Schema.Attribute.Private;
+    members: Schema.Attribute.Component<
+      'company-profile.management-item',
+      true
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -706,6 +818,45 @@ export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVisionMissionVisionMission extends Struct.SingleTypeSchema {
+  collectionName: 'vision_missions';
+  info: {
+    displayName: 'Vision Mission';
+    pluralName: 'vision-missions';
+    singularName: 'vision-mission';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::vision-mission.vision-mission'
+    > &
+      Schema.Attribute.Private;
+    missions: Schema.Attribute.Component<'company-profile.mission-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    vision: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
@@ -1220,12 +1371,17 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
+      'api::award.award': ApiAwardAward;
+      'api::business-license.business-license': ApiBusinessLicenseBusinessLicense;
       'api::career.career': ApiCareerCareer;
       'api::category.category': ApiCategoryCategory;
-      'api::company-profile.company-profile': ApiCompanyProfileCompanyProfile;
+      'api::company-history.company-history': ApiCompanyHistoryCompanyHistory;
+      'api::company-overview.company-overview': ApiCompanyOverviewCompanyOverview;
+      'api::management.management': ApiManagementManagement;
       'api::product.product': ApiProductProduct;
       'api::tag.tag': ApiTagTag;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
+      'api::vision-mission.vision-mission': ApiVisionMissionVisionMission;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

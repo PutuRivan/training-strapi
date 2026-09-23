@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "business_licenses",
+  "info": {
+    "singularName": "business-license",
+    "pluralName": "business-licenses",
+    "displayName": "Business License"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}

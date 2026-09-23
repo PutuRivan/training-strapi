@@ -24,6 +24,8 @@ Project ini menggunakan studi kasus **Company Profile Website**, dengan struktur
 
 ---
 
+
+
 # 📁 Project Structure
 
 ```text
@@ -52,10 +54,15 @@ training-strapi/
 │   │   ├── article/
 │   │   ├── career/
 │   │   ├── category/
-│   │   ├── company-profile/
+│   │   ├── award/
+│   │   ├── business-license/
+│   │   ├── company-history/
+│   │   ├── company-overview/
+│   │   ├── management/
 │   │   ├── product/
 │   │   ├── tag/
-│   │   └── testimonial/
+│   │   ├── testimonial/
+│   │   └── vision-mission/
 │   │
 │   ├── components/
 │   │   └── company-profile/
@@ -190,47 +197,43 @@ Testimonial
 
 ---
 
+
+
 # 🏢 Company Profile
 
-Company Profile menggunakan **Single Type** karena hanya terdapat satu company profile dalam sistem.
+Company Profile dimodelkan secara **resource-oriented** sebagai enam Single Type. Setiap section mempunyai endpoint sendiri sehingga frontend hanya mengambil resource yang dibutuhkan dan dapat menggunakannya kembali di lebih dari satu halaman.
 
 ```text
-Company Profile
-├── Company Overview
-├── Vision & Mission
-├── Business License
-├── History
-├── Management
-└── Award
+Single Types
+├── Company Overview  → /api/company-overview
+├── Vision & Mission  → /api/vision-mission
+├── Business License  → /api/business-license
+├── Company History   → /api/company-history
+├── Management        → /api/management
+└── Awards            → /api/awards
 ```
 
-Bagian tersebut dipisahkan menjadi reusable Strapi Components.
+Struktur berulang yang tidak memerlukan endpoint atau lifecycle independen tetap menggunakan reusable Strapi Components.
 
 ### Available Components
 
 ```text
 company-profile/
-├── company-overview
-├── vision-mission
-├── business-license
-├── history
+├── award-item
 ├── history-item
-├── management
-└── award
+├── management-item
+└── mission-item
 ```
 
-Beberapa component seperti `Management` dan `Award` bersifat repeatable.
+`Management`, `Awards`, `Vision & Mission`, dan `Company History` menyimpan daftar internal sebagai repeatable component.
 
 History menggunakan nested component:
 
 ```text
-Company Profile
-      │
-      ▼
-    History
-      │
-      ▼
-History Item[]
+Company History ──► History Item[]
+Management      ──► Management Item[]
+Awards          ──► Award Item[]
+Vision Mission  ──► Mission Item[]
 ```
 
 ---
@@ -417,16 +420,21 @@ http://localhost:1337/api
 ## Core Endpoints
 
 
-| Method | Endpoint                    | Description         |
-| ------ | --------------------------- | ------------------- |
-| GET    | `/api/articles`             | Get articles        |
-| GET    | `/api/articles/:documentId` | Get article         |
-| GET    | `/api/categories`           | Get categories      |
-| GET    | `/api/tags`                 | Get tags            |
-| GET    | `/api/products`             | Get products        |
-| GET    | `/api/careers`              | Get careers         |
-| GET    | `/api/testimonials`         | Get testimonials    |
-| GET    | `/api/company-profile`      | Get company profile |
+| Method | Endpoint                    | Description                      |
+| ------ | --------------------------- | -------------------------------- |
+| GET    | `/api/articles`             | Get articles                     |
+| GET    | `/api/articles/:documentId` | Get article                      |
+| GET    | `/api/categories`           | Get categories                   |
+| GET    | `/api/tags`                 | Get tags                         |
+| GET    | `/api/products`             | Get products                     |
+| GET    | `/api/careers`              | Get careers                      |
+| GET    | `/api/testimonials`         | Get testimonials                 |
+| GET    | `/api/company-overview`     | Get company overview             |
+| GET    | `/api/vision-mission`       | Get vision and missions          |
+| GET    | `/api/business-license`     | Get business license information |
+| GET    | `/api/company-history`      | Get company history timeline     |
+| GET    | `/api/management`           | Get management members           |
+| GET    | `/api/awards`               | Get company awards               |
 
 
 REST API Strapi juga mendukung:
@@ -847,7 +855,11 @@ Variables utama:
 
 ---
 
+
+
 # 🚀 Getting Started
+
+
 
 ## 1. Clone Repository
 
@@ -1102,8 +1114,6 @@ Delete Content
 
 ---
 
-
-
 # 📚 Key Learning Points
 
 Beberapa konsep penting yang ditunjukkan project ini:
@@ -1154,36 +1164,6 @@ memungkinkan frontend meminta payload sesuai kebutuhan.
 
 ---
 
-
-
-# ✅ Final Training Verification
-
-Sebelum training dianggap selesai, lakukan verification berikut:
-
-1. Administration Panel dapat dijalankan.
-2. PostgreSQL berhasil terhubung.
-3. Seluruh Content Type tersedia.
-4. Company Profile Components tersedia.
-5. Article → Category relation bekerja.
-6. Article ↔ Tag relation bekerja.
-7. Draft & Publish bekerja.
-8. Public Content API permission dapat diuji.
-9. Administration Panel Admin dan Editor mempunyai permission berbeda.
-10. Filtering, sorting, fields, populate, dan pagination berhasil diuji.
-11. Custom latest Article endpoint berhasil.
-12. Policy menolak `limit` yang tidak valid.
-13. Article summary endpoint berhasil.
-14. Category yang masih digunakan Article tidak dapat dihapus.
-15. Global request logger mencatat Content API request.
-16. Upload security menolak MIME type yang dilarang.
-17. Nodemailer dapat menggunakan local Mailpit.
-18. Postman collection dapat digunakan untuk API verification.
-19. `npm run build` berhasil tanpa error.
-
----
-
-
-
 # 📖 References
 
 - [Strapi Documentation](https://docs.strapi.io/)
@@ -1193,8 +1173,6 @@ Sebelum training dianggap selesai, lakukan verification berikut:
 - [Strapi Document Service API](https://docs.strapi.io/cms/api/document-service)
 
 ---
-
-
 
 ## 👨‍💻 Author
 

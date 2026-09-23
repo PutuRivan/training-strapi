@@ -1,9 +1,9 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface CompanyProfileAward extends Struct.ComponentSchema {
-  collectionName: 'components_company_profile_awards';
+export interface CompanyProfileAwardItem extends Struct.ComponentSchema {
+  collectionName: 'components_company_profile_award_items';
   info: {
-    displayName: 'Award';
+    displayName: 'Award Item';
   };
   attributes: {
     description: Schema.Attribute.Text & Schema.Attribute.Required;
@@ -11,39 +11,6 @@ export interface CompanyProfileAward extends Struct.ComponentSchema {
       Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     year: Schema.Attribute.Integer & Schema.Attribute.Required;
-  };
-}
-
-export interface CompanyProfileBusinessLicense extends Struct.ComponentSchema {
-  collectionName: 'components_company_profile_business_licenses';
-  info: {
-    displayName: 'Business License';
-  };
-  attributes: {
-    items: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface CompanyProfileCompanyOverview extends Struct.ComponentSchema {
-  collectionName: 'components_company_profile_company_overviews';
-  info: {
-    displayName: 'Company Overview';
-  };
-  attributes: {
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface CompanyProfileHistory extends Struct.ComponentSchema {
-  collectionName: 'components_company_profile_histories';
-  info: {
-    displayName: 'History';
-  };
-  attributes: {
-    items: Schema.Attribute.Component<'company-profile.history-item', true>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -75,10 +42,10 @@ export interface CompanyProfileHistoryItem extends Struct.ComponentSchema {
   };
 }
 
-export interface CompanyProfileManagement extends Struct.ComponentSchema {
-  collectionName: 'components_company_profile_managements';
+export interface CompanyProfileManagementItem extends Struct.ComponentSchema {
+  collectionName: 'components_company_profile_management_items';
   info: {
-    displayName: 'Management';
+    displayName: 'Management Item';
   };
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
@@ -88,28 +55,23 @@ export interface CompanyProfileManagement extends Struct.ComponentSchema {
   };
 }
 
-export interface CompanyProfileVisionMission extends Struct.ComponentSchema {
-  collectionName: 'components_company_profile_vision_missions';
+export interface CompanyProfileMissionItem extends Struct.ComponentSchema {
+  collectionName: 'components_company_profile_mission_items';
   info: {
-    displayName: 'Vision Mission';
+    displayName: 'Mission Item';
   };
   attributes: {
-    missions: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    vision: Schema.Attribute.Text & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
 declare module '@strapi/strapi' {
   export namespace Public {
     export interface ComponentSchemas {
-      'company-profile.award': CompanyProfileAward;
-      'company-profile.business-license': CompanyProfileBusinessLicense;
-      'company-profile.company-overview': CompanyProfileCompanyOverview;
-      'company-profile.history': CompanyProfileHistory;
+      'company-profile.award-item': CompanyProfileAwardItem;
       'company-profile.history-item': CompanyProfileHistoryItem;
-      'company-profile.management': CompanyProfileManagement;
-      'company-profile.vision-mission': CompanyProfileVisionMission;
+      'company-profile.management-item': CompanyProfileManagementItem;
+      'company-profile.mission-item': CompanyProfileMissionItem;
     }
   }
 }

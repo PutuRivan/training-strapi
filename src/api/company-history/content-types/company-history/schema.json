@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "company_histories",
+  "info": {
+    "singularName": "company-history",
+    "pluralName": "company-histories",
+    "displayName": "Company History"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "component",
+      "component": "company-profile.history-item",
+      "repeatable": true,
+      "required": true
+    }
+  }
+}
